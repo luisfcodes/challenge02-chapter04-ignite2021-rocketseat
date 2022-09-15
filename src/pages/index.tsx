@@ -12,8 +12,8 @@ export default function Home(): JSX.Element {
 
   // useEffect(() => {
   //   api.post('images', {
-  //     url: 'https://blog.portalpos.com.br/app/uploads/2021/08/cores.jpg',
-  //     title: 'Bexigas',
+  //     url: 'https://static8.depositphotos.com/1003924/886/i/450/depositphotos_8868243-stock-photo-spectrum-multicolored-eye-macro.jpg',
+  //     title: 'Olho Humano',
   //     description: 'Testando a inserção no BD'
   //   })
   // }, [])
@@ -40,7 +40,7 @@ export default function Home(): JSX.Element {
     // TODO GET AND RETURN NEXT PAGE PARAM
     {
       getNextPageParam: (response) => {
-        response.data.after ? response.data.after : null
+        return response.data.after ? response.data.after : null
       }
     }
   );
@@ -57,8 +57,18 @@ export default function Home(): JSX.Element {
   }, [data]);
 
   // TODO RENDER LOADING SCREEN
+  if (isLoading) {
+    return (
+      <Loading />
+    )
+  }
 
   // TODO RENDER ERROR SCREEN
+  if (isError) {
+    return (
+      <Error />
+    )
+  }
 
   return (
     <>
@@ -66,7 +76,13 @@ export default function Home(): JSX.Element {
 
       <Box maxW={1120} px={20} mx="auto" my={20}>
         <CardList cards={formattedData} />
+
         {/* TODO RENDER LOAD MORE BUTTON IF DATA HAS NEXT PAGE */}
+        { hasNextPage && (
+          <Button onClick={() => fetchNextPage()}>
+            { isFetchingNextPage ? 'Carregando...' : 'Carregar mais' }
+          </Button>
+        ) }
       </Box>
     </>
   );
