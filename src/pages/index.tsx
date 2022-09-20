@@ -23,7 +23,7 @@ export default function Home(): JSX.Element {
     'images',
     // TODO AXIOS REQUEST WITH PARAM
     async ({ pageParam = null }) => {
-      const response = await api.get('images', {
+      const response = await api.get('/api/images', {
         params: {
           after: pageParam
         }
