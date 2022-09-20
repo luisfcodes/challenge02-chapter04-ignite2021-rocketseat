@@ -89,25 +89,21 @@ export function FormAddImage({ closeModal }: FormAddImageProps): JSX.Element {
 
   const onSubmit = async (data: Record<string, unknown>): Promise<void> => {
     try {
-      //const uploadImage = await axios.post(`https://api.imgbb.com/1/upload?key=${process.env.NEXT_PUBLIC_IMGBB_API_KEY}image=${data.image[0]}`)
       
-      
-      // const uploadImage = await fetch('https://api.imgbb.com/1/upload', {
-      //   method: 'POST',
-      //   headers: {
-      //     "Access-Control-Allow-Origin": "*",
-      // "Access-Control-Allow-Credentials": "true",
-      // "Access-Control-Allow-Methods": "GET,HEAD,OPTIONS,POST,PUT",
-      // "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept, Authorization"
-      //   },
-      //   body: JSON.stringify({
-      //     key: process.env.NEXT_PUBLIC_IMGBB_API_KEY,
-      //     image: data.image
-      //   }),
-      // })
+      let body = new FormData()
+      body.set('key', process.env.NEXT_PUBLIC_IMGBB_API_KEY)
+      body.append('image', data.image[0])
+
+      const uploadImage = await axios({
+        method: 'POST',
+        url: 'https://api.imgbb.com/1/upload',
+        data: body
+      })
+           
       // TODO SHOW ERROR TOAST IF IMAGE URL DOES NOT EXISTS
       // TODO EXECUTE ASYNC MUTATION
       // TODO SHOW SUCCESS TOAST
+      
     } catch {
       // TODO SHOW ERROR TOAST IF SUBMIT FAILED
     } finally {
