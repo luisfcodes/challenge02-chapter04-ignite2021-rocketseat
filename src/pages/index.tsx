@@ -7,16 +7,10 @@ import { CardList } from '../components/CardList';
 import { api } from '../services/api';
 import { Loading } from '../components/Loading';
 import { Error } from '../components/Error';
+import Head from 'next/head'
+
 
 export default function Home(): JSX.Element {
-
-  // useEffect(() => {
-  //   api.post('images', {
-  //     url: 'https://static8.depositphotos.com/1003924/886/i/450/depositphotos_8868243-stock-photo-spectrum-multicolored-eye-macro.jpg',
-  //     title: 'Olho Humano',
-  //     description: 'Testando a inserção no BD'
-  //   })
-  // }, [])
 
   const {
     data,
@@ -72,6 +66,11 @@ export default function Home(): JSX.Element {
 
   return (
     <>
+
+      <Head>
+        <title>upfi | Home</title>
+      </Head>
+
       <Header />
 
       <Box maxW={1120} px={20} mx="auto" my={20}>
